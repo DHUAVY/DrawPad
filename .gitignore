@@ -1,0 +1,9 @@
+
+*.xml
+*.class
+*.iml
+out/production/DrawPad/code/DrawPad/lib/bridj-0.7.0.jar
+out/production/DrawPad/code/DrawPad/lib/slf4j-api-1.7.2.jar
+out/production/DrawPad/code/DrawPad/lib/webcam-capture-0.3.12.jar
+out/
+.idea/
