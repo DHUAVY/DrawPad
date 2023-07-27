@@ -98,11 +98,10 @@ public class ImageListen extends MouseAdapter implements ActionListener, ChangeL
 
     @Override
     public void stateChanged(javax.swing.event.ChangeEvent e){
-
         JSlider slider = (JSlider) e.getSource ();
         int value = slider.getValue ();
         System.out.println ("scale:" + value);
-        buffImgList.add (ImageInterpolation.scaleImage(imgF.drawOriginalImage(), value));
+        buffImgList.add (ImageInterpolation.scaleImage(imgF.filteredImg, value));
         showPanel.repaint ();// 刷新
     }
 
@@ -152,22 +151,40 @@ public class ImageListen extends MouseAdapter implements ActionListener, ChangeL
         String op = btn.getText ();
         switch(op) {
             case "原图":
-                buffImgList.add (imgF.drawOriginalImage ());
+                imgF.filteredImg = imgF.drawOriginalImage ();
                 break;
             case "马赛克":
-                buffImgList.add (imgF.drawMosaic ());
+                imgF.filteredImg =  imgF.drawMosaic ();
                 break;
             case "灰度":
-                buffImgList.add (imgF.drawGray ());
+                imgF.filteredImg = imgF.drawGray ();
                 break;
             case "二值化":
-                buffImgList.add (imgF.drawBinary ());
+                imgF.filteredImg = imgF.drawBinary ();
+                break;
+            case "反色":
+                imgF.filteredImg = imgF.drawRevert();
+                break;
+            case "轮廓":
+                imgF.filteredImg = imgF.drawEdge();
+                break;
+            case "油画":
+                imgF.filteredImg = imgF.drawOilPaint();
                 break;
             case "浮雕":
-                buffImgList.add (imgF.drawRelief ());
+                imgF.filteredImg = imgF.drawRelief ();
+                break;
+            case "毛玻璃":
+                imgF.filteredImg = imgF.drawGroundGlass ();
+                break;
+            case "锐化":
+                imgF.filteredImg = imgF.drawSharpening ();
+                break;
             default:
+                imgF.filteredImg = imgF.drawOriginalImage ();
                 break;
         }
+        buffImgList.add (imgF.filteredImg);
         showPanel.repaint ();// 刷新
 
     }
